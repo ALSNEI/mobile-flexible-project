@@ -1,0 +1,28 @@
+@function px2em($px, $base-font-size: 75px) { 
+    @if (unitless($px)) { 
+        @return px2em($px + 0px);
+    } @else if (unit($px) == rem) { 
+        @return $px; 
+    } 
+    @return ($px / $base-font-size) * 1rem; 
+}
+// 字体适配
+@mixin font-dpr($font-size){ 
+    font-size: $font-size; 
+    [data-dpr="2"] & { font-size: $font-size * 2; } 
+    [data-dpr="3"] & { font-size: $font-size * 3; } 
+}
+
+header {
+    h1 {
+        background: url('../images/pointer.png');
+        background-repeat: no-repeat;
+        margin:0;
+        @include font-dpr(30px)
+    }
+
+    img {
+        width: px2em(75);
+        margin:0;
+    }
+}
